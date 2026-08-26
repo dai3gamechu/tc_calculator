@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TC計算ツール</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>TC計算ツール</h1>
+
+        <section class="input-section">
+
+            <h2>入力</h2>
+
+            <label for="training-type">育成する兵士のTier</label>
+            <select id="training-type">
+                <option value="6-6">T6</option>
+                <option value="5-5">T5</option>
+                <option value="4-4">T4</option>
+                <option value="3-3">T3</option>
+                <option value="5-6">T5 → T6</option>
+                <option value="4-6">T4 → T6</option>
+                <option value="3-6">T3 → T6</option>
+                <option value="4-5">T4 → T5</option>
+                <option value="3-5">T3 → T5</option>
+            </select>
+
+            <label for="soldier-count">育成人数</label>
+            <input type="number" id="soldier-count" value="2000" min="1">
+
+            <label for="training-speed">訓練速度</label>
+            <div class="input-with-unit">
+                <input type="number" id="training-speed" value="82.8" step="0.1">
+                <span>%</span>
+            </div>
+
+            <!--
+            <label for="tc-day">TC日</label>
+            <select id="tc-day">
+                <option value="250">初日</option>
+                <option value="200">6～7日目</option>
+            </select>
+            -->
+
+            <button id="calculate-button">計算する</button>
+
+        </section>
+
+        <section class="result-section">
+
+            <h2>計算結果</h2>
+
+            <div class="result-item">
+                <span>訓練時間</span>
+                <strong id="training-time">---</strong>
+            </div>
+
+            <div class="result-item spear-result">
+                <span>スピアポイント</span>
+
+                <div class="spear-points">
+                    <div>
+                        <span>TC初日</span>
+                        <strong id="spear-point-day1">---</strong>
+                    </div>
+
+                    <div>
+                        <span>TC6-7日目</span>
+                        <strong id="spear-point-day6-7">---</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-item">
+                <span>訓練ポイント</span>
+                <strong id="training-point">---</strong>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

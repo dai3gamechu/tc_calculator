@@ -532,14 +532,12 @@ function getInventory(tier) {
 }
 
 
-function calculateDay3(target, unlocked) {
+function calculateDay3(target, speed, unlocked) {
 
-    let upgradePoint =
-        0;
+    let upgradePoint = 0;
+    let upgradeSeconds = 0;
 
-
-    const upgrades =
-        [];
+    const upgrades = [];
 
 
     /*
@@ -557,27 +555,35 @@ function calculateDay3(target, unlocked) {
             getInventory(tier);
 
 
-        /*
-            0人なら
-            アップグレード対象外
-        */
-
+        // 0人なら対象外
         if (count <= 0) {
             continue;
         }
 
 
+        // 1人あたりの獲得ポイント
         const perSoldier =
             trainingPointValues[unlocked] -
             trainingPointValues[tier];
 
 
+        // 獲得ポイント
         const point =
             count * perSoldier;
 
 
-        upgradePoint +=
-            point;
+        // アップグレードに必要な訓練時間
+        const seconds =
+            calculateTrainingSeconds(
+                speed,
+                tier,
+                unlocked,
+                count
+            );
+
+
+        upgradePoint += point;
+        upgradeSeconds += seconds;
 
 
         upgrades.push({
@@ -590,7 +596,9 @@ function calculateDay3(target, unlocked) {
 
             count,
 
-            point
+            point,
+
+            seconds
         });
     }
 
@@ -608,7 +616,7 @@ function calculateDay3(target, unlocked) {
 
     /*
         アップグレードだけで
-        足りない場合
+        ポイントが足りない場合
     */
 
     if (remaining > 0) {
@@ -624,6 +632,21 @@ function calculateDay3(target, unlocked) {
             );
 
 
+        const point =
+            count *
+            perSoldier;
+
+
+        // 新規育成に必要な訓練時間
+        const seconds =
+            calculateTrainingSeconds(
+                speed,
+                unlocked,
+                unlocked,
+                count
+            );
+
+
         training = {
 
             tier:
@@ -631,10 +654,21 @@ function calculateDay3(target, unlocked) {
 
             count,
 
-            point:
-                count * perSoldier
+            point,
+
+            seconds
         };
     }
+
+
+    // 必要訓練時間の合計
+    const totalSeconds =
+        upgradeSeconds +
+        (
+            training
+                ? training.seconds
+                : 0
+        );
 
 
     return {
@@ -643,9 +677,13 @@ function calculateDay3(target, unlocked) {
 
         upgradePoint,
 
+        upgradeSeconds,
+
         remaining,
 
-        training
+        training,
+
+        totalSeconds
     };
 }
 
@@ -1066,6 +1104,7 @@ function calculateReverse() {
         const r =
             calculateDay3(
                 target,
+                speed,
                 tier
             );
 
@@ -1148,6 +1187,19 @@ function calculateReverse() {
 
                         <strong>
                             ${formatPeople(item.count)}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-row">
+
+                        <span>
+                            訓練時間
+                        </span>
+
+                        <strong>
+                            ${formatTrainingTime(item.seconds)}
                         </strong>
 
                     </div>
@@ -1239,6 +1291,21 @@ function calculateReverse() {
                 <div class="detail-row">
 
                     <span>
+                        訓練時間
+                    </span>
+
+                    <strong>
+                        ${formatTrainingTime(
+                            r.training.seconds
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span>
                         追加育成ポイント
                     </span>
 
@@ -1252,6 +1319,27 @@ function calculateReverse() {
 
             `;
         }
+
+
+        /*
+        details += `
+
+            <div class="detail-row">
+
+                <span>
+                    必要訓練時間合計
+                </span>
+
+                <strong>
+                    ${formatTrainingTime(
+                        r.totalSeconds
+                    )}
+                </strong>
+
+            </div>
+
+        `;
+        */
 
 
         const actualPoint =

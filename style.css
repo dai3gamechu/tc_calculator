@@ -1,578 +1,299 @@
 * {
-  box-sizing: border-box;
-}
-
-:root {
-  --bg: #f4f7fb;
-  --panel: rgba(255, 255, 255, 0.96);
-  --text: #1f2937;
-  --muted: #6b7280;
-  --line: #d9e0e8;
-  --primary: #315f91;
-  --primary-dark: #24496f;
-  --primary-soft: #eaf2fb;
-  --accent: #f4b740;
-  --danger-soft: #fff4e5;
+    box-sizing:border-box
 }
 
 body {
-  margin: 0;
-  padding: 28px 16px 48px;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "Hiragino Kaku Gothic ProN",
-    "Yu Gothic",
-    Meiryo,
-    sans-serif;
-  color: var(--text);
-  background: var(--bg);
-}
-
-button,
-input {
-  font: inherit;
+    margin:0;
+    padding:20px;
+    background:#f2f2f2;
+    font-family:Arial,"Noto Sans JP",sans-serif;
+    color:#333
 }
 
 .container {
-  width: min(1180px, 100%);
-  margin: 0 auto;
+    max-width:600px;
+    margin:0 auto
 }
 
-.hero {
-  margin-bottom: 18px;
-  padding: 24px 26px;
-  border-radius: 18px;
-  color: #fff;
-  background: linear-gradient(135deg, #294f79, #3f77ad);
-  box-shadow: 0 8px 24px rgba(24, 47, 72, 0.14);
+h1 {
+    text-align:center;
+    margin-bottom:25px
 }
 
-.hero h1 {
-  margin: 0 0 8px;
-  font-size: clamp(26px, 4vw, 38px);
+section {
+    background:#fff;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px
 }
 
-.hero p {
-  margin: 0;
-  opacity: 0.92;
+h2 {
+    margin-top:0;
+    font-size:20px;
+    border-bottom:1px solid #ddd;
+    padding-bottom:10px
 }
 
-.panel {
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: var(--panel);
-  box-shadow: 0 5px 18px rgba(31, 41, 55, 0.06);
+h3 {
+    margin-top:25px;
+    font-size:17px
 }
 
-.controls {
-  padding: 20px;
+label {
+    display:block;
+    margin-top:15px;
+    margin-bottom:5px;
+    font-weight:bold
 }
 
-.control-group + .control-group {
-  margin-top: 18px;
+input,select {
+    width:100%;
+    padding:10px;
+    font-size:16px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    background:#fff
 }
 
-.control-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 700;
-  font-size: 14px;
+.input-with-unit {
+    display:flex;
+    align-items:center;
+    gap:8px
 }
 
-.segmented,
-.chip-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.input-with-unit input {
+    flex:1
 }
 
-.filter-btn,
-.chip {
-  border: 1px solid #bdc8d4;
-  border-radius: 10px;
-  background: #fff;
-  color: #334155;
-  cursor: pointer;
-  transition:
-    background 0.15s ease,
-    color 0.15s ease,
-    border-color 0.15s ease,
-    transform 0.15s ease;
+.mode-switch {
+    display:flex;
+    gap:10px;
+    margin-bottom:20px
 }
 
-.filter-btn {
-  min-width: 140px;
-  padding: 10px 18px;
-  font-weight: 700;
+.mode-button {
+    flex:1;
+    padding:12px;
+    background:#ddd;
+    color:#333;
+    font-size:16px;
+    font-weight:bold;
+    border:0;
+    border-radius:6px;
+    cursor:pointer
 }
 
-.chip {
-  padding: 8px 13px;
-  font-size: 14px;
+.mode-button.active {
+    background:#333;
+    color:#fff
 }
 
-.filter-btn:hover,
-.chip:hover {
-  border-color: var(--primary);
-  transform: translateY(-1px);
+.calculate-button {
+    width:100%;
+    margin-top:25px;
+    padding:12px;
+    font-size:18px;
+    font-weight:bold;
+    background:#333;
+    color:#fff;
+    border:0;
+    border-radius:6px;
+    cursor:pointer
 }
 
-.filter-btn.active,
-.chip.active {
-  border-color: var(--primary);
-  color: #fff;
-  background: var(--primary);
+.calculate-button:hover,.mode-button:hover {
+    opacity:.8
 }
 
-.search-input {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid #bdc8d4;
-  border-radius: 10px;
-  outline: none;
-  background: #fff;
+.result-section {
+    margin-top:25px;
+    padding:0;
+    border-radius:0
 }
 
-.search-input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(49, 95, 145, 0.12);
+.result-item {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid #eee
 }
 
-.summary-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 14px 2px 10px;
-  color: var(--muted);
-  font-size: 14px;
+.result-item strong {
+    text-align:right
 }
 
-#resultCount {
-  flex-shrink: 0;
-  font-weight: 700;
-  color: var(--text);
+.spear-result {
+    align-items:flex-start
 }
 
-.notice {
-  margin: 12px 0;
-  padding: 16px;
-  border: 1px solid #f2d29b;
-  border-radius: 12px;
-  background: var(--danger-soft);
+.spear-points {
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    min-width:230px
+}
+
+.spear-points>div {
+    display:flex;
+    justify-content:space-between;
+    gap:20px
+}
+
+.day-description {
+    margin-top:10px;
+    padding:12px;
+    background:#f7f7f7;
+    border-left:4px solid #555;
+    font-size:14px;
+    line-height:1.7
+}
+
+.inventory-row {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px
+}
+
+.inventory-row label {
+    width:50px;
+    margin:0;
+    flex-shrink:0
+}
+
+.inventory-row input {
+    flex:1
+}
+
+.input-note {
+    margin-top:5px;
+    font-size:13px;
+    color:#666
 }
 
 .hidden {
-  display: none;
+    display:none
 }
 
-.table-panel {
-  overflow: hidden;
+#reverse-result {
+    margin-top:30px
 }
 
-.table-wrap {
-  overflow-x: auto;
+.action-section {
+    margin-bottom:25px;
+    padding:20px;
+    background:#f7f7f7;
+    border-radius:8px
 }
 
-table {
-  width: 100%;
-  min-width: 820px;
-  border-collapse: collapse;
+.action-section h2 {
+    border:0;
+    margin-bottom:15px;
+    padding:0
 }
 
-th,
-td {
-  padding: 13px 14px;
-  border-bottom: 1px solid #e5e9ef;
-  text-align: left;
-  vertical-align: middle;
+.action-step {
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:14px;
+    line-height:1.8
 }
 
-th {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  color: #fff;
-  background: var(--primary-dark);
-  font-size: 14px;
-  white-space: nowrap;
+.step-number {
+    width:28px;
+    height:28px;
+    flex:0 0 28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#333;
+    color:#fff;
+    font-weight:bold;
+    font-size:14px;
+    margin-top:2px
 }
 
-tbody tr:hover {
-  background: #f8fbff;
+.step-text {
+    flex:1;
+    font-weight:bold
 }
 
-.recommend-col {
-  width: 110px;
-  text-align: left;
+.action-note {
+    margin:4px 0 14px 40px;
+    font-size:14px;
+    line-height:1.7;
+    color:#555
 }
 
-.mission-col {
-  min-width: 390px;
-  text-align: left;
+.point-section {
+    margin-bottom:30px
 }
 
-.point-col {
-  width: 85px;
-  text-align: center;
+.point-value {
+    font-size:20px;
+    font-weight:bold;
+    line-height:1.6
 }
 
-.rarity-col {
-  width: 105px;
-  text-align: center;
+.detail-section {
+    margin-bottom:25px
 }
 
-.category-col {
-  width: 220px;
+.detail-row {
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:10px 0;
+    border-bottom:1px solid #eee;
+    line-height:1.5
 }
 
-.tags {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 5px;
-  white-space: nowrap;
+.detail-row strong {
+    text-align:right
 }
 
-.tag {
-  flex-shrink: 0;
+.result-message {
+    margin-top:12px;
+    padding:12px;
+    background:#f7f7f7;
+    border-left:4px solid #888;
+    line-height:1.7;
+    font-size:14px
 }
 
-
-/* ミッション内容を主役にする */
-.mission-cell {
-  text-align: left;
-  font-size: 15px;
-  font-weight: 500;
+.condition-section {
+    padding-top:15px;
+    border-top:1px solid #ddd;
+    font-size:13px;
+    color:#666
 }
 
-
-/* Pt */
-td.point-col {
-  text-align: center;
-  font-weight: 700;
+.condition-section h3 {
+    margin-top:0;
+    font-size:15px;
+    color:#555
 }
 
-
-/* レアリティ */
-.rarity-cell {
-  text-align: center;
+.condition-list {
+    margin:0;
+    padding-left:20px;
+    line-height:1.8
 }
 
-.rarity {
-  font-size: 12px;
-  font-weight: 400;
-  white-space: nowrap;
-  color: #4b5563;
-}
+@media(max-width:480px) {
+    body {
+        padding:12px
+    }
+
+    section {
+        padding:16px
+    }
+
+    .spear-points {
+        min-width:190px
+    }
 
-
-/* アンコモン：かなり淡い青 */
-.rarity-uncommon {
-  background: #f0f6fc;
-}
-
-
-/* エリート：かなり淡い紫 */
-.rarity-elite {
-  background: #f5f0fa;
-}
-
-
-/* レジェンド：かなり淡い黄色 */
-.rarity-legend {
-  background: #fdf7e7;
-}
-
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.tag {
-  display: inline-block;
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: var(--primary-soft);
-  color: var(--primary-dark);
-  font-size: 12px;
-  white-space: nowrap;
-}
-
-.rarity {
-  font-weight: 400;
-  white-space: nowrap;
-}
-
-/* アンコモン：淡い青 */
-.rarity-uncommon {
-  background: #e6f0fb;
-}
-
-/* エリート：淡い紫 */
-.rarity-elite {
-  background: #eee7f8;
-}
-
-/* レジェンド：淡いゴールド */
-.rarity-legend {
-  background: #fbf1d6;
-}
-
-.legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 18px;
-  margin-top: 14px;
-  padding: 0 2px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.legend strong {
-  color: var(--text);
-}
-
-.empty-row td {
-  padding: 36px 16px;
-  text-align: center;
-  color: var(--muted);
-}
-
-@media (max-width: 600px) {
-
-  body {
-    padding: 14px 10px 32px;
-  }
-
-  .hero {
-    padding: 18px 16px;
-    border-radius: 14px;
-  }
-
-  .hero h1 {
-    margin-bottom: 6px;
-  }
-
-  .controls {
-    padding: 15px;
-  }
-
-  .filter-btn {
-    flex: 1 1 calc(50% - 4px);
-    min-width: 0;
-    padding: 10px 8px;
-  }
-
-
-  .summary-row {
-    display: block;
-  }
-
-  #resultCount {
-    margin-top: 5px;
-  }
-
-
-  /*
-    =========================
-    スマホ用ミッションカード
-    =========================
-  */
-
-  .table-panel {
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  .table-wrap {
-    overflow: visible;
-  }
-
-  table,
-  thead,
-  tbody,
-  tr,
-  th,
-  td {
-    display: block;
-    width: 100%;
-    min-width: 0;
-  }
-
-  thead {
-    display: none;
-  }
-
-  tbody {
-    display: grid;
-    gap: 10px;
-  }
-
-  tbody tr {
-    padding: 16px 14px;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: #fff;
-    box-shadow: 0 4px 14px rgba(31, 41, 55, 0.05);
-  }
-
-  tbody tr:hover {
-    background: #fff;
-  }
-
-
-  /*
-    各項目
-  */
-
-  td {
-    display: grid;
-    grid-template-columns: 95px 1fr;
-    align-items: start;
-
-    padding: 6px 0;
-    border: 0;
-
-    text-align: left;
-  }
-
-
-  td::before {
-    display: block;
-
-    margin: 0;
-
-    color: var(--muted);
-    font-size: 12px;
-    font-weight: 700;
-  }
-
-
-  /*
-    見出し
-  */
-
-  td.recommend::before {
-    content: "おすすめ";
-  }
-
-  td.mission-cell::before {
-    content: "内容";
-  }
-
-  td.point-col::before {
-    content: "Pt";
-  }
-
-  td.rarity-cell::before {
-    content: "レアリティ";
-  }
-
-  td.category-cell::before {
-    content: "カテゴリ";
-  }
-
-
-  /*
-    おすすめ
-  */
-
-  td.recommend {
-    text-align: left;
-  }
-
-
-  /*
-    ミッション内容
-  */
-
-  td.mission-cell {
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.6;
-  }
-
-
-  /*
-    Pt
-  */
-
-  td.point-col {
-    text-align: left;
-    font-size: 17px;
-    font-weight: 700;
-  }
-
-
-  /*
-    レアリティ
-
-    PCではセル全体に背景色を付けているが、
-    スマホでは横一面に広がらないように解除する
-  */
-
-  td.rarity-cell {
-    background: transparent;
-    text-align: left;
-  }
-
-  td.rarity-cell .rarity {
-    display: inline-block;
-
-    width: fit-content;
-
-    padding: 4px 9px;
-
-    border-radius: 6px;
-
-    font-size: 12px;
-    font-weight: 400;
-  }
-
-
-  /*
-    スマホではレアリティ文字部分だけ色付け
-  */
-
-  td.rarity-uncommon .rarity {
-    background: #f0f6fc;
-  }
-
-  td.rarity-elite .rarity {
-    background: #f5f0fa;
-  }
-
-  td.rarity-legend .rarity {
-    background: #fdf7e7;
-  }
-
-
-  /*
-    カテゴリ
-  */
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-
-    width: auto;
-
-    gap: 5px;
-
-    vertical-align: initial;
-  }
-
-
-  /*
-    おすすめ度説明
-  */
-
-  .legend {
-    display: grid;
-    gap: 4px;
-  }
 }
